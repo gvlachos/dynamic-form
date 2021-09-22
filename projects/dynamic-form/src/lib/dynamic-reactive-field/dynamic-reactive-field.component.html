@@ -1,33 +1,87 @@
 <ng-container *ngIf="field.visible !== false" [ngSwitch]="field.type">
   <!-- CHECKBOX -->
-  <!-- TODO: add ui component-->
+  <div *ngSwitchCase="0" class="checkbox-view">
+    <mat-checkbox [formControl]="control" color="primary">
+      {{ field.name }}
+    </mat-checkbox>
+  </div>
 
   <!-- DATEPICKER -->
-  <!-- TODO: add ui component-->
+  <mat-list-item *ngSwitchCase="1">
+    <mat-form-field class="width100">
+      <input matInput [matDatepicker]="picker" [placeholder]="field.name" [formControl]="control" />
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+  </mat-list-item>
 
   <!-- SINGLE RADIO -->
-  <!-- TODO: add ui component-->
+  <mat-radio-group *ngSwitchCase="2" [formControl]="control">
+    <mat-radio-button *ngFor="let option of field.options" [value]="option" color="primary">
+      {{ option }}
+    </mat-radio-button>
+  </mat-radio-group>
 
   <!-- SELECT DROPDOWN -->
-  <!-- TODO: add ui component-->
+  <mat-list-item *ngSwitchCase="3">
+    <mat-form-field class="width100">
+      <mat-select [placeholder]="field.name" [formControl]="control">
+        <mat-option *ngFor="let option of field.options" [value]="option">{{ option }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </mat-list-item>
 
   <!-- SELECT LIST -->
-  <!-- TODO: add ui component-->
+  <mat-selection-list *ngSwitchCase="4" [formControl]="control" color="primary">
+    <mat-list-option
+      mySelectionList
+      *ngFor="let option of field.options"
+      [value]="option"
+      color="primary"
+      checkboxPosition="before"
+    >
+      {{ option }}
+    </mat-list-option>
+  </mat-selection-list>
 
-  <!-- SLIDE TOGGLE for children-->
-  <!-- TODO: add ui component-->
+  <!-- SLIDE TOGGLE -->
+  <ng-container *ngSwitchCase="5">
+    <!-- <mat-list-item > -->
+    <mat-slide-toggle matLine [formControl]="control" color="primary" class="checkbox-view">
+      {{ field.name }}
+    </mat-slide-toggle>
+    <!-- </mat-list-item> -->
+
+    <div matLine *ngIf="field.children" style="padding-top: 7px">
+      <ng-container *ngFor="let child of field.children">
+        <lib-dynamic-reactive-field [field]="child" class="toggleChild"></lib-dynamic-reactive-field>
+      </ng-container>
+    </div>
+  </ng-container>
 
   <!-- TEXTAREA -->
-  <!-- TODO: add ui component-->
+  <mat-list-item *ngSwitchCase="6">
+    <mat-form-field class="width100">
+      <textarea matInput type="text" [formControl]="control" [placeholder]="field.name"></textarea>
+    </mat-form-field>
+  </mat-list-item>
 
   <!-- TEXTFIELD -->
-  <!-- TODO: add ui component-->
+  <mat-list-item *ngSwitchCase="7">
+    <mat-form-field class="width100">
+      <input matInput type="text" [formControl]="control" [placeholder]="field.name" />
+    </mat-form-field>
+  </mat-list-item>
 
   <!-- SUBHEADER -->
-  <!-- TODO: add ui component-->
+  <div *ngSwitchCase="8" class="subheader">
+    {{ field.name }}
+  </div>
 
   <!-- DIVIDER -->
-  <!-- TODO: add ui component-->
+  <ng-container *ngSwitchCase="9">
+    <hr />
+  </ng-container>
 
-  <!-- TODO: add no-field-found ui component-->
+  <mat-list-item *ngSwitchDefault>no field found</mat-list-item>
 </ng-container>
