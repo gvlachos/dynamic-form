@@ -1,0 +1,11 @@
+.form {
+  width: 20rem;
+  display: block;
+  padding: 0.5rem 1rem;
+}
+
+.error {
+  color: red;
+  font-size: 0.9em;
+  margin-top: -15px;
+}
