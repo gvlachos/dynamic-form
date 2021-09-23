@@ -3,6 +3,7 @@ import { Validators } from '@angular/forms';
 import { DynamicReactiveFormComponent } from '@dynamic-form-src';
 import { Field, FieldType, KeyValuePair } from 'projects/dynamic-form/src/lib/dynamic-form.model';
 import { Subscription } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
@@ -81,8 +82,8 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnInit(): void {}
 
   ngAfterViewInit(): void {
-    this.subscriptions.push(this.mainForm.values$.subscribe(values => (this.mainFormValues = values)));
-    this.subscriptions.push(this.toggleForm.values$.subscribe(values => (this.toggleFormValues = values)));
+    this.mainForm.values$.pipe(debounceTime(100)).subscribe(values => (this.mainFormValues = values));
+    this.toggleForm.values$.pipe(debounceTime(100)).subscribe(values => (this.toggleFormValues = values));
   }
 
   ngOnDestroy(): void {
