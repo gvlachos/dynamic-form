@@ -79,8 +79,20 @@
             "polyfills": "projects/dynamic-form-demo/src/polyfills.ts",
             "tsConfig": "projects/dynamic-form-demo/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
-            "assets": ["projects/dynamic-form-demo/src/favicon.ico", "projects/dynamic-form-demo/src/assets"],
-            "styles": ["projects/dynamic-form-demo/src/styles.scss"],
+            "assets": [
+              "projects/dynamic-form-demo/src/favicon.ico",
+              "projects/dynamic-form-demo/src/assets",
+              {
+                "glob": "**/*",
+                "input": "node_modules/@taiga-ui/icons/src",
+                "output": "assets/taiga-ui/icons"
+              }
+            ],
+            "styles": [
+              "projects/dynamic-form-demo/src/styles.scss",
+              "node_modules/@taiga-ui/core/styles/taiga-ui-global.less",
+              "node_modules/@taiga-ui/core/styles/taiga-ui-theme.less"
+            ],
             "scripts": []
           },
           "configurations": {
