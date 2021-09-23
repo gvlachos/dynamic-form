@@ -1,19 +1,13 @@
-import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Validators } from '@angular/forms';
-import { DynamicReactiveFormComponent } from '@dynamic-form-src';
 import { Field, FieldType, KeyValuePair } from 'projects/dynamic-form/src/lib/dynamic-form.model';
-import { Subscription } from 'rxjs';
-import { debounceTime } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
-  @ViewChild('mainForm') mainForm!: DynamicReactiveFormComponent;
-  @ViewChild('toggleForm') toggleForm!: DynamicReactiveFormComponent;
-
+export class AppComponent implements OnInit {
   leftForm: Field[] = [
     {
       name: 'firstName',
@@ -75,18 +69,16 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
     },
   ];
 
-  subscriptions: Subscription[] = [];
   mainFormValues: KeyValuePair[] = [];
   toggleFormValues: KeyValuePair[] = [];
 
   ngOnInit(): void {}
 
-  ngAfterViewInit(): void {
-    this.mainForm.values$.pipe(debounceTime(100)).subscribe(values => (this.mainFormValues = values));
-    this.toggleForm.values$.pipe(debounceTime(100)).subscribe(values => (this.toggleFormValues = values));
+  setMainFormValues(values: KeyValuePair[]) {
+    this.mainFormValues = values;
   }
 
-  ngOnDestroy(): void {
-    this.subscriptions.forEach(sub => sub.unsubscribe());
+  setToggleFormValues(values: KeyValuePair[]) {
+    this.toggleFormValues = values;
   }
 }
