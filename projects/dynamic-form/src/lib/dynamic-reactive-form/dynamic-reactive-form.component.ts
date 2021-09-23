@@ -86,16 +86,8 @@ export class DynamicReactiveFormComponent implements OnInit, OnDestroy {
     });
 
     /**
-     * This is for demo purposes and should be removed for production code
-     * debounceTime added to wait for the user to stop typing
+     * Populate the Slide Toggle child fields if needed
      */
-    // this.form.valueChanges.pipe(debounceTime(100)).subscribe(data => {
-    //   console.log('Dynamic form changed: ', data, this.form.controls);
-    // });
-
-    // /**
-    //  * Populate the Slide Toggle child fields if needed
-    //  */
     this.handleSlideToggleChildren();
 
     /**
