@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { BehaviorSubject, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { Error, Field, KeyValuePair } from '../dynamic-form.model';
 
 @Component({
@@ -9,9 +9,6 @@ import { Error, Field, KeyValuePair } from '../dynamic-form.model';
   styleUrls: ['./dynamic-reactive-form.component.scss'],
 })
 export class DynamicReactiveFormComponent implements OnInit, OnDestroy {
-  /**
-   * Initialize Inputs passed in from parent component
-   */
   /**
    * Initialize Inputs passed in from parent component
    */
@@ -34,8 +31,6 @@ export class DynamicReactiveFormComponent implements OnInit, OnDestroy {
   public formReady = false;
 
   private subscription!: Subscription;
-  private values: BehaviorSubject<KeyValuePair[]> = new BehaviorSubject<KeyValuePair[]>([]);
-  public values$ = this.values.asObservable();
 
   /**
    * Allow optional slide toggles to show/hide conditional (child) fields.
@@ -94,7 +89,7 @@ export class DynamicReactiveFormComponent implements OnInit, OnDestroy {
      * Keep track of the form's valid values
      */
     this.subscription = this.form.valueChanges.subscribe(() => {
-      this.values.next(this.extractFormValues(this.form));
+      this.emitFormValues.emit(this.extractFormValues(this.form));
     });
 
     /**

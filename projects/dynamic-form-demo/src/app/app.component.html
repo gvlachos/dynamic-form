@@ -1,7 +1,11 @@
 <h1>Dynamic form demo</h1>
 
 <div class="main">
-  <lib-dynamic-reactive-form [fieldset]="leftForm" [errors]="errors" #mainForm></lib-dynamic-reactive-form>
+  <lib-dynamic-reactive-form
+    [fieldset]="leftForm"
+    [errors]="errors"
+    (emitFormValues)="setMainFormValues($event)"
+  ></lib-dynamic-reactive-form>
   <div class="values">
     <div *ngFor="let field of mainFormValues">
       <span>{{ field.key }}:&nbsp;</span>
@@ -11,7 +15,11 @@
 </div>
 
 <div class="toggle">
-  <lib-dynamic-reactive-form [fieldset]="toggleSet" [errors]="errors" #toggleForm></lib-dynamic-reactive-form>
+  <lib-dynamic-reactive-form
+    [fieldset]="toggleSet"
+    [errors]="errors"
+    (emitFormValues)="setToggleFormValues($event)"
+  ></lib-dynamic-reactive-form>
   <div class="values">
     <div *ngFor="let field of toggleFormValues">
       <span>{{ field.key }}:&nbsp;</span>
