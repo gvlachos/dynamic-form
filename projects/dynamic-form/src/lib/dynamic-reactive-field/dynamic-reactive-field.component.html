@@ -1,33 +1,58 @@
 <ng-container *ngIf="field.visible !== false" [ngSwitch]="field.type">
   <!-- CHECKBOX -->
   <!-- TODO: add ui component-->
+  <ng-container *ngSwitchCase="0"> </ng-container>
 
   <!-- DATEPICKER -->
   <!-- TODO: add ui component-->
+  <ng-container *ngSwitchCase="1"> </ng-container>
 
   <!-- SINGLE RADIO -->
   <!-- TODO: add ui component-->
+  <ng-container *ngSwitchCase="2"> </ng-container>
 
   <!-- SELECT DROPDOWN -->
-  <!-- TODO: add ui component-->
+  <ng-container *ngSwitchCase="3">
+    <tui-select *ngIf="items?.length" class="field" [formControl]="control">
+      {{ field.name }}
+      <tui-data-list-wrapper *tuiDataList [items]="items"></tui-data-list-wrapper>
+    </tui-select>
+  </ng-container>
 
   <!-- SELECT LIST -->
   <!-- TODO: add ui component-->
+  <ng-container *ngSwitchCase="4"> </ng-container>
 
   <!-- SLIDE TOGGLE for children-->
   <!-- TODO: add ui component-->
+  <ng-container *ngSwitchCase="5">
+    <tui-toggle class="field" [formControl]="control" size="l"></tui-toggle>
+    <div matLine *ngIf="field.children" style="padding-top: 7px">
+      <ng-container *ngFor="let child of field.children">
+        <lib-dynamic-reactive-field [field]="child" class="toggleChild"></lib-dynamic-reactive-field>
+      </ng-container>
+    </div>
+  </ng-container>
 
   <!-- TEXTAREA -->
   <!-- TODO: add ui component-->
+  <ng-container *ngSwitchCase="6"> </ng-container>
 
   <!-- TEXTFIELD -->
-  <!-- TODO: add ui component-->
+  <ng-container *ngSwitchCase="7">
+    <tui-input class="field" [formControl]="control">
+      {{ field.name }}
+    </tui-input>
+  </ng-container>
 
   <!-- SUBHEADER -->
   <!-- TODO: add ui component-->
+  <ng-container *ngSwitchCase="8"> </ng-container>
 
   <!-- DIVIDER -->
   <!-- TODO: add ui component-->
+  <ng-container *ngSwitchCase="9"> </ng-container>
 
   <!-- TODO: add no-field-found ui component-->
+  <ng-container *ngSwitchCase="10"> </ng-container>
 </ng-container>

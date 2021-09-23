@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroupDirective } from '@angular/forms';
+import { TUI_ARROW } from '@taiga-ui/kit';
 import { Field } from '../dynamic-form.model';
 
 @Component({
@@ -8,8 +9,14 @@ import { Field } from '../dynamic-form.model';
   styleUrls: ['./dynamic-reactive-field.component.scss'],
 })
 export class DynamicReactiveFieldComponent implements OnInit {
+  readonly arrow = TUI_ARROW;
+
   @Input() field!: Field;
+
   public control!: FormControl;
+
+  public items: ReadonlyArray<string> | null = null;
+
   constructor(private formGroupDir: FormGroupDirective) {}
 
   ngOnInit(): void {
@@ -23,5 +30,6 @@ export class DynamicReactiveFieldComponent implements OnInit {
      * parent component without the need to pass our own inputs or event emitters.
      */
     this.control = this.formGroupDir.control.get(this.field.name) as FormControl;
+    this.items = this.field?.options?.length ? this.field.options : null;
   }
 }
