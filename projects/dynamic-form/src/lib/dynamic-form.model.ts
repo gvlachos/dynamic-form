@@ -30,7 +30,7 @@ export interface KeyValuePair {
   value: any;
 }
 
-export interface Error {
+export interface FieldError {
   name: string;
   text: string;
   rules: Validators[];

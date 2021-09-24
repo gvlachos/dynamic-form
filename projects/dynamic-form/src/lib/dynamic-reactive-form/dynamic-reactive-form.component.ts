@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { Error, Field, KeyValuePair } from '../dynamic-form.model';
+import { FieldError, Field, KeyValuePair } from '../dynamic-form.model';
 
 @Component({
   selector: 'lib-dynamic-reactive-form',
@@ -12,10 +12,10 @@ export class DynamicReactiveFormComponent implements OnInit, OnDestroy {
   /**
    * Initialize Inputs passed in from parent component
    */
-  @Input() fieldset!: Field[]; // Required
+  @Input() fieldset!: ReadonlyArray<Field>; // Required
   // Required
-  @Input() errors: Error[] = []; // Optional
-  @Input() prefillData: KeyValuePair[] = []; // Optional (default values)
+  @Input() errors: ReadonlyArray<FieldError> = []; // Optional
+  @Input() prefillData: ReadonlyArray<KeyValuePair> = []; // Optional (default values)
   @Input() readOnly = false; // Optional
 
   /**
